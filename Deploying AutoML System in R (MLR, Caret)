@@ -1,0 +1,72 @@
+# Load the mlr package
+install.packages("mlr")
+install.packages("xgboost")
+install.packages("ranger")
+
+
+library(mlr)
+library(xgboost)
+library(ranger)
+
+# Load the Iris dataset
+data(iris)
+
+# Define features and target variable
+features <- setdiff(names(iris), "Species")
+target <- "Species"
+
+# Create a task object for multiclass classification
+task <- makeClassifTask(data = iris, target = target)
+
+# Define a single learner (e.g., Random Forest)
+learner <- makeLearner("classif.ranger", predict.type = "response")
+
+# Define a parameter grid for hyperparameter tuning (e.g., number of trees)
+param_grid <- makeParamSet(
+makeIntegerParam("num.trees", lower = 50, upper = 500)
+)
+
+# Create a tuning control
+ctrl <- makeTuneControlRandom(maxit = 10)
+
+# Perform AutoML with hyperparameter tuning
+result <- tuneParams(learner, task, resampling = makeResampleDesc("CV", iters = 5),
+					measures = list(acc), par.set = param_grid, control = ctrl)
+
+# View model results
+print(result)
+
+
+# Install and load the caret library
+install.packages("caret")
+install.packages("randomForest")
+
+library(caret)
+library(randomForest)
+
+# Generate a random dataset
+set.seed(123)
+n <- 100
+random_data <- data.frame(
+X1 = rnorm(n),
+X2 = rnorm(n),
+Y = rbinom(n, 1, 0.5)
+)
+
+# Define target variable
+target <- "Y"
+
+# Specify the training control and the model tuning grid
+ctrl <- trainControl(method = "cv", number = 5)
+tune_grid <- expand.grid(.mtry = 2:5)
+
+# Run AutoML with random forests as an example
+model <- train(random_data[, setdiff(names(random_data), target)], 
+		random_data[, target], method = "rf", trControl = ctrl, tuneGrid = tune_grid)
+
+# Make predictions on synthetic data
+new_data <- data.frame(X1 = 0.1, X2 = -0.2)
+predictions <- predict(model, newdata = new_data)
+
+# Evaluate the model and view the results
+print(model)
