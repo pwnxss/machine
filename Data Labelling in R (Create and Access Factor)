@@ -1,0 +1,51 @@
+# Create a factor
+music_genre <- factor(c("Jazz", "Rock", "Classic", "Classic", "Pop", "Jazz", "Rock", "Jazz"))
+
+# Print the factor
+music_genre
+
+music_genre <- factor(c("Jazz", "Rock", "Classic", "Classic", "Pop", "Jazz", "Rock", "Jazz"))
+levels(music_genre)
+
+music_genre <- factor(c("Jazz", "Rock", "Classic", "Classic", "Pop", "Jazz", "Rock", "Jazz"), levels = c("Classic", "Jazz", "Pop", "Rock", "Other"))
+levels(music_genre)
+
+music_genre <- factor(c("Jazz", "Rock", "Classic", "Classic", "Pop", "Jazz", "Rock", "Jazz"))
+
+length(music_genre)
+
+music_genre <- factor(c("Jazz", "Rock", "Classic", "Classic", "Pop", "Jazz", "Rock", "Jazz"))
+music_genre[3]
+
+music_genre <- factor(c("Jazz", "Rock", "Classic", "Classic", "Pop", "Jazz", "Rock", "Jazz"))
+music_genre[3] <- "Pop"
+music_genre[3]
+
+music_genre <- factor(c("Jazz", "Rock", "Classic", "Classic", "Pop", "Jazz", "Rock", "Jazz"))
+music_genre[3] <- "Opera"
+music_genre[3]
+
+music_genre <- factor(c("Jazz", "Rock", "Classic", "Classic", "Pop", "Jazz", "Rock", "Jazz"), levels = c("Classic", "Jazz", "Pop", "Rock", "Opera"))
+music_genre[3] <- "Opera"
+music_genre[3]
+
+
+# creating a data vector 
+companies = c("Karunya DGS Auditorium","Karunya Digital        Science","Karunya College","KITS", 
+			"Karunya University", 
+			"Karunya CTC", 
+			"Karunya Library", 
+			"Karunya Canteen","Karunya","Karunya School") 
+
+# printing the original vector 
+print("Original Data") 
+print(companies) 
+
+# converting the data to factors 
+factors <- factor(companies) 
+
+# converting data to label encoded values 
+print("Label Encoded Data") 
+
+# printing the numeric equivalents of these vector values 
+print(as.numeric(factors))
