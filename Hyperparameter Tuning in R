@@ -1,0 +1,47 @@
+install.packages("randomForest")
+install.packages("caret")
+
+library(randomForest)
+library(caret)
+
+# Load the mtcars dataset
+data <- mtcars
+
+# Convert 'am' (Transmission) to a factor for classification
+mtcars$am <- factor(mtcars$am, levels = c(0, 1), labels = c("Automatic", "Manual"))
+
+# Subset of features for modeling
+features <- mtcars[, c("mpg", "cyl", "hp", "wt")]
+
+#Define Hyperparameter Grid
+# Define a grid for the 'mtry' parameter in Random Forest
+tuneGrid <- expand.grid(mtry = c(1, 2))
+
+#Cross-Validation Setup (using stratified sampling)
+control <- trainControl(method = "cv", 
+                        number = 5,
+                        summaryFunction = defaultSummary,
+                        savePredictions = TRUE,
+                        classProbs = FALSE,
+                        sampling = "smote")  # Handle class imbalance in small datasets
+
+
+# Model Training with Hyperparameter Tuning
+# Train the Random Forest model using the 'caret' package and grid search
+model <- train(am ~ mpg + cyl + hp + wt, 
+               data = mtcars, 
+               method = "rf", 
+               metric = "Accuracy",   # Set the metric explicitly for classification
+               trControl = control, 
+               tuneGrid = tuneGrid,
+               allowParallel = TRUE)
+
+
+# Print the Best Tuned Model
+print(model$bestTune) # Output the best 'mtry' value
+print(model)
+
+
+# Visualize the Tuning Results
+# Plot the performance of different hyperparameter values
+plot(model)
