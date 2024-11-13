@@ -1,0 +1,60 @@
+#1. MEAN, SUM, AND PRODUCT IN R:
+
+#CODE:
+numbers <- c(1, 2, 3, 4, 5)
+mean_value <- mean(numbers)
+sum_value <- sum(numbers)
+product_value <- prod(numbers)
+print(paste("Mean:", mean_value))
+print(paste("Sum:", sum_value))
+print(paste("Product:", product_value))
+
+#2. ADDING TWO VECTORS IN R:
+
+#CODE:
+vector1 <- c(1, 2, 3)
+vector2 <- c(4, 5, 6)
+result_vector <- vector1 + vector2
+print(result_vector)
+
+#3. GENERATING RANDOM NUMBERS IN R:
+
+#CODE:
+n <- 5
+random_numbers <- runif(n)
+random_integers <- sample(1:100, n, replace = TRUE)
+print(random_numbers)
+print(random_integers)
+
+#4. CALCULATING MEAN, MEDIAN, AND MODE IN R:
+
+#CODE:
+numbers <- c(1, 2, 3, 4, 5, 6, 7, 7, 8)
+mean_value <- mean(numbers)
+median_value <- median(numbers)
+get_mode <- function(v) {
+uniqv <- unique(v)
+uniqv[which.max(tabulate(match(v, uniqv)))]
+}
+mode_value <- get_mode(numbers)
+print(paste("Mean:", mean_value))
+print(paste("Median:", median_value))
+print(paste("Mode:", mode_value))
+
+#5. VARIANCE AND STANDARD DEVIATION CALCULATION IN R:
+
+#CODE:
+numbers <- c(2, 4, 6, 8, 10)
+variance_value <- var(numbers)
+std_dev_value <- sd(numbers)
+print(paste("Variance:", variance_value))
+print(paste("Standard Deviation:", std_dev_value))
+
+#6. FINDING THE RANGE IN R
+
+#CODE:
+numbers <- c(10, 15, 20, 25, 30)
+range_value <- range(numbers)
+range_difference <- diff(range_value)
+print(paste("Range (Min, Max):", range_value))
+print(paste("Range Difference:", range_difference))
